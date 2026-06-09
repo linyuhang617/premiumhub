@@ -2,12 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView.vue'
+import PolicyListView from '@/views/PolicyListView.vue'
+import PolicyDetailView from '@/views/PolicyDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/login', component: LoginView },
     { path: '/', component: HomeView, meta: { requiresAuth: true } },
+    { path: '/policies', component: PolicyListView, meta: { requiresAuth: true } },
+    { path: '/policies/:id', component: PolicyDetailView, meta: { requiresAuth: true } },
   ]
 })
 

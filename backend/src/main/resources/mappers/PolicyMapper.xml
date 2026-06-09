@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.premiumhub.backend.mapper.PolicyMapper">
+
+    <select id="findByCondition" resultType="com.premiumhub.backend.entity.Policy">
+        SELECT policy_id, policy_no, insured_name, id_no_encrypted,
+               premium_amount, status, due_date, version, created_at
+        FROM POLICY
+        <where>
+            <if test="policyNo != null and policyNo != ''">
+                AND policy_no LIKE CONCAT('%', #{policyNo}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+            <if test="dueDateFrom != null and dueDateFrom != ''">
+                AND due_date &gt;= #{dueDateFrom}
+            </if>
+            <if test="dueDateTo != null and dueDateTo != ''">
+                AND due_date &lt;= #{dueDateTo}
+            </if>
+        </where>
+        ORDER BY ${sortColumn} ${sortDir}
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="countByCondition" resultType="long">
+        SELECT COUNT(*)
+        FROM POLICY
+        <where>
+            <if test="policyNo != null and policyNo != ''">
+                AND policy_no LIKE CONCAT('%', #{policyNo}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+            <if test="dueDateFrom != null and dueDateFrom != ''">
+                AND due_date &gt;= #{dueDateFrom}
+            </if>
+            <if test="dueDateTo != null and dueDateTo != ''">
+                AND due_date &lt;= #{dueDateTo}
+            </if>
+        </where>
+    </select>
+
+</mapper>
