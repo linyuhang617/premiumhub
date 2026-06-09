@@ -1,8 +1,10 @@
 package com.premiumhub.backend.controller;
 
 import com.premiumhub.backend.dto.PolicyQueryRequest;
+import com.premiumhub.backend.dto.PolicyRequest;
 import com.premiumhub.backend.dto.PolicyResponse;
 import com.premiumhub.backend.service.PolicyService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,5 +26,16 @@ public class PolicyController {
     @GetMapping("/{id}")
     public ResponseEntity<PolicyResponse> detail(@PathVariable Long id) {
         return ResponseEntity.ok(policyService.getPolicyById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<PolicyResponse> create(@Valid @RequestBody PolicyRequest req) {
+        return ResponseEntity.ok(policyService.createPolicy(req));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PolicyResponse> update(@PathVariable Long id,
+                                                  @Valid @RequestBody PolicyRequest req) {
+        return ResponseEntity.ok(policyService.updatePolicy(id, req));
     }
 }

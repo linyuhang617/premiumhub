@@ -1,8 +1,10 @@
 <template>
   <div style="padding: 24px">
-    <h2>保單列表</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px">
+      <h2 style="margin: 0">保單列表</h2>
+      <el-button type="primary" @click="router.push('/policies/new')">＋ 新增保單</el-button>
+    </div>
 
-    <!-- 篩選區 -->
     <el-form :inline="true" :model="query" style="margin-bottom: 16px">
       <el-form-item label="保單號">
         <el-input v-model="query.policyNo" placeholder="輸入保單號" clearable @change="fetchPolicies" />
@@ -24,15 +26,12 @@
       </el-form-item>
     </el-form>
 
-    <!-- 表格 -->
     <el-table :data="policies" v-loading="loading" border stripe>
       <el-table-column prop="policyNo" label="保單號" width="160" />
       <el-table-column prop="insuredName" label="被保人" width="120" />
       <el-table-column prop="idNoMasked" label="身分證號" width="150" />
       <el-table-column prop="premiumAmount" label="保費金額" width="130">
-        <template #default="{ row }">
-          {{ row.premiumAmount.toLocaleString() }}
-        </template>
+        <template #default="{ row }">{{ row.premiumAmount.toLocaleString() }}</template>
       </el-table-column>
       <el-table-column prop="status" label="狀態" width="110">
         <template #default="{ row }">
@@ -40,14 +39,14 @@
         </template>
       </el-table-column>
       <el-table-column prop="dueDate" label="到期日" width="120" />
-      <el-table-column label="操作" width="100">
+      <el-table-column label="操作" width="160">
         <template #default="{ row }">
           <el-button size="small" @click="goDetail(row.policyId)">詳情</el-button>
+          <el-button size="small" type="primary" @click="goEdit(row.policyId)">編輯</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <!-- 分頁 -->
     <el-pagination
       style="margin-top: 16px"
       background
@@ -84,8 +83,7 @@ const query = ref({
 async function fetchPolicies() {
   loading.value = true
   try {
-    const params = { ...query.value }
-    const res = await api.get('/api/policies', { params })
+    const res = await api.get('/api/policies', { params: { ...query.value } })
     policies.value = res.data.content
     total.value = res.data.total
   } finally {
@@ -93,25 +91,13 @@ async function fetchPolicies() {
   }
 }
 
-function onPageChange(page: number) {
-  query.value.page = page - 1
-  fetchPolicies()
-}
-
-function onSizeChange(size: number) {
-  query.value.size = size
-  query.value.page = 0
-  fetchPolicies()
-}
-
-function goDetail(id: number) {
-  router.push(`/policies/${id}`)
-}
-
+function onPageChange(page: number) { query.value.page = page - 1; fetchPolicies() }
+function onSizeChange(size: number) { query.value.size = size; query.value.page = 0; fetchPolicies() }
+function goDetail(id: number) { router.push(`/policies/${id}`) }
+function goEdit(id: number) { router.push(`/policies/${id}/edit`) }
 function statusLabel(status: string) {
   return { ACTIVE: '有效', EXPIRED: '已過期', CANCELLED: '已取消' }[status] ?? status
 }
-
 function statusTagType(status: string) {
   return { ACTIVE: 'success', EXPIRED: 'info', CANCELLED: 'danger' }[status] ?? ''
 }
