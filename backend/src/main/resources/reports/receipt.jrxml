@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="receipt" pageWidth="595" pageHeight="842"
+              columnWidth="535" leftMargin="30" rightMargin="30"
+              topMargin="30" bottomMargin="30"
+              uuid="1a2b3c4d-0000-0000-0000-000000000001">
+
+    <parameter name="paymentId"   class="java.lang.String"/>
+    <parameter name="policyId"    class="java.lang.String"/>
+    <parameter name="insuredName" class="java.lang.String"/>
+    <parameter name="amount"      class="java.lang.String"/>
+    <parameter name="traceId"     class="java.lang.String"/>
+    <parameter name="paidAt"      class="java.lang.String"/>
+    <parameter name="status"      class="java.lang.String"/>
+
+    <detail>
+        <band height="400">
+            <staticText>
+                <reportElement x="0" y="0" width="535" height="40"/>
+                <textElement textAlignment="Center">
+                    <font size="20" isBold="true"/>
+                </textElement>
+                <text><![CDATA[PremiumHub 保費請款收據]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="48" width="535" height="1"/>
+            </line>
+            <staticText>
+                <reportElement x="0" y="60" width="150" height="25"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <text><![CDATA[請款 ID：]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="60" width="375" height="25"/>
+                <textElement><font size="12"/></textElement>
+                <textFieldExpression><![CDATA[$P{paymentId}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="90" width="150" height="25"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <text><![CDATA[保單 ID：]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="90" width="375" height="25"/>
+                <textElement><font size="12"/></textElement>
+                <textFieldExpression><![CDATA[$P{policyId}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="120" width="150" height="25"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <text><![CDATA[被保險人：]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="120" width="375" height="25"/>
+                <textElement><font size="12"/></textElement>
+                <textFieldExpression><![CDATA[$P{insuredName}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="150" width="150" height="25"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <text><![CDATA[請款金額：]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="150" width="375" height="25"/>
+                <textElement><font size="12"/></textElement>
+                <textFieldExpression><![CDATA["NT$ " + $P{amount}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="180" width="150" height="25"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <text><![CDATA[狀態：]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="180" width="375" height="25"/>
+                <textElement><font size="12"/></textElement>
+                <textFieldExpression><![CDATA[$P{status}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="210" width="150" height="25"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <text><![CDATA[Trace ID：]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="210" width="375" height="25"/>
+                <textElement><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{traceId}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="240" width="150" height="25"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <text><![CDATA[請款時間：]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="160" y="240" width="375" height="25"/>
+                <textElement><font size="12"/></textElement>
+                <textFieldExpression><![CDATA[$P{paidAt}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

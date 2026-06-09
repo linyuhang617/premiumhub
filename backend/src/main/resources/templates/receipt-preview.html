@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-TW">
+<head>
+    <meta charset="UTF-8"/>
+    <title>收據預覽</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #1F3864; border-bottom: 2px solid #2E75B6; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        td { padding: 10px 12px; border: 1px solid #ddd; }
+        td:first-child { font-weight: bold; background: #f0f4f8; width: 140px; }
+        .status-success { color: #2E7D32; font-weight: bold; }
+        .status-pending  { color: #E65100; font-weight: bold; }
+        .footer { margin-top: 30px; color: #888; font-size: 12px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>PremiumHub 保費請款收據</h1>
+    <table>
+        <tr>
+            <td>請款 ID</td>
+            <td th:text="${payment.paymentId}"></td>
+        </tr>
+        <tr>
+            <td>保單 ID</td>
+            <td th:text="${payment.policyId}"></td>
+        </tr>
+        <tr>
+            <td>被保險人</td>
+            <td th:text="${insuredName}"></td>
+        </tr>
+        <tr>
+            <td>請款金額</td>
+            <td th:text="'NT$ ' + ${payment.amount}"></td>
+        </tr>
+        <tr>
+            <td>狀態</td>
+            <td>
+                <span th:if="${payment.status == 'SUCCESS'}" class="status-success" th:text="${payment.status}"></span>
+                <span th:if="${payment.status == 'PENDING'}"  class="status-pending"  th:text="${payment.status}"></span>
+                <span th:if="${payment.status != 'SUCCESS' and payment.status != 'PENDING'}" th:text="${payment.status}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Trace ID</td>
+            <td th:text="${payment.traceId}"></td>
+        </tr>
+        <tr>
+            <td>請款時間</td>
+            <td th:text="${payment.paidAt}"></td>
+        </tr>
+    </table>
+    <div class="footer">本收據由系統自動產生，如有疑問請聯絡客服</div>
+</body>
+</html>
