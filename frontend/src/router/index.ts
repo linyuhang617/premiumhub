@@ -5,6 +5,7 @@ import HomeView from '@/views/HomeView.vue'
 import PolicyListView from '@/views/PolicyListView.vue'
 import PolicyDetailView from '@/views/PolicyDetailView.vue'
 import PolicyFormView from '@/views/PolicyFormView.vue'
+import PaymentView from '@/views/PaymentView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,7 @@ const router = createRouter({
     { path: '/policies/new', component: PolicyFormView, meta: { requiresAuth: true } },
     { path: '/policies/:id/edit', component: PolicyFormView, meta: { requiresAuth: true } },
     { path: '/policies/:id', component: PolicyDetailView, meta: { requiresAuth: true } },
+    { path: '/payments', component: PaymentView, meta: { requiresAuth: true } },
   ]
 })
 
