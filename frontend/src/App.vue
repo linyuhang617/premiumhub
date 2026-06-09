@@ -5,6 +5,7 @@
       <router-link to="/" style="color:#ccc;text-decoration:none">首頁</router-link>
       <router-link to="/policies" style="color:#ccc;text-decoration:none">保單列表</router-link>
       <router-link to="/payments" style="color:#ccc;text-decoration:none">保費請款</router-link>
+      <router-link v-if="authStore.role === 'ROLE_ADMIN'" to="/seal-auth" style="color:#ccc;text-decoration:none">核印授權</router-link>
       <span style="margin-left:auto;color:#ccc;cursor:pointer" @click="logout">登出</span>
     </nav>
     <RouterView />
