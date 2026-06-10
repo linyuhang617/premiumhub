@@ -8,6 +8,7 @@ import PolicyFormView from '@/views/PolicyFormView.vue'
 import PaymentView from '@/views/PaymentView.vue'
 import SealAuthView from '@/views/SealAuthView.vue'
 import ReportView from '@/views/ReportView.vue'
+import DashboardView from '@/views/DashboardView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,7 @@ const router = createRouter({
     { path: '/payments', component: PaymentView, meta: { requiresAuth: true } },
     { path: '/seal-auth', component: SealAuthView, meta: { requiresAuth: true } },
     { path: '/reports', component: ReportView, meta: { requiresAuth: true } },
+    { path: '/dashboard', component: DashboardView, meta: { requiresAuth: true } },
   ]
 })
 
