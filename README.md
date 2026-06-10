@@ -44,6 +44,32 @@ cd frontend && npm install && npm run dev
 | S6 | 收據 PDF 下載 / HTML 預覽 | `/reports` |
 | S7 | Dashboard 統計 + ECharts 折線圖 | `/dashboard` |
 
+## 截圖預覽
+
+### 登入
+![登入](docs/screenshots/01-login.png)
+
+### 首頁（JWT 認證狀態）
+![首頁](docs/screenshots/02-home.png)
+
+### 保單列表（姓名遮罩 王○明 / 身分證遮罩 A12\*\*\*\*789）
+![保單列表](docs/screenshots/03-policy-list.png)
+
+### 保單詳情
+![保單詳情](docs/screenshots/04-policy-detail.png)
+
+### 保費請款（Trace ID 全程追蹤）
+![保費請款](docs/screenshots/05-payment.png)
+
+### 收據下載頁（JasperReport PDF + Thymeleaf HTML 預覽）
+![收據下載](docs/screenshots/06-report.png)
+
+### Thymeleaf SSR HTML 收據預覽（Server-Side Rendering）
+![HTML 收據](docs/screenshots/07-receipt-html.png)
+
+### JasperReport PDF 收據（流式輸出防 OOM）
+![PDF 收據](docs/screenshots/08-receipt-pdf.png)
+
 ## 專案結構
 
 **backend/**
