@@ -39,7 +39,7 @@ cd frontend && npm install && npm run dev
 | S1 | JWT 登入 / 自動 Refresh | `/login` |
 | S2 | 保單查詢列表（分頁 + 篩選） | `/policies` |
 | S3 | 保單新增 / 編輯（樂觀鎖） | `/policies/new` `/policies/:id/edit` |
-| S4 | 保費請款（悲觀鎖 + Trace ID） | `/payments` |
+| S4 | 保費請款（悲觀鎖 + 防重複扣款） | `/payments` |
 | S5 | 管理員核印授權（RBAC） | `/seal-auth` |
 | S6 | 收據 PDF 下載 / HTML 預覽 | `/reports` |
 | S7 | Dashboard 統計 + ECharts 折線圖 | `/dashboard` |
@@ -79,11 +79,11 @@ Service 層覆蓋範圍：AuthService / PaymentService / SealAuthService / Dashb
 | BCrypt 單向雜湊 | S1 | AuthService, PasswordConfig |
 | Axios Interceptor 401 自動 Refresh | S1 | src/utils/axios.ts |
 | MyBatis #{} vs ${} + SQL Injection 防護 | S2 | PolicyMapper.xml |
-| AES 個資加密 + 遮罩 | S2 | AesUtil, PolicyService |
+| AES 個資加密 + 遮罩（符合金融個資規範） | S2 | AesUtil, PolicyService |
 | JPA 樂觀鎖 @Version + 409 Conflict | S3 | Policy entity, GlobalExceptionHandler |
 | @Transactional rollbackFor + 自呼叫陷阱 | S4 | PaymentService |
 | REQUIRES_NEW 獨立事務（稽核 Log） | S4 | AuditLogService |
-| 悲觀鎖 PESSIMISTIC_WRITE（防重複扣款） | S4 | PolicyRepository |
+| 悲觀鎖 PESSIMISTIC_WRITE + 冪等性（防高併發重複扣款） | S4 | PolicyRepository, PaymentService |
 | MDC Trace ID 全程追蹤 | S4 | PaymentService |
 | @PreAuthorize RBAC + @EnableMethodSecurity | S5 | SealAuthController, SecurityConfig |
 | JPA N+1 → JOIN FETCH | S5 | SealAuthRepository |
