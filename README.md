@@ -45,23 +45,22 @@ cd frontend && npm install && npm run dev
 | S7 | Dashboard 統計 + ECharts 折線圖 | `/dashboard` |
 
 ## 專案結構
-premiumhub/
-├── backend/
-│   ├── src/main/java/com/premiumhub/backend/
-│   │   ├── config/          # SecurityConfig, CorsConfig, DataInitializer
-│   │   ├── controller/      # AuthController, PolicyController, PaymentController...
-│   │   ├── dto/             # Request / Response / Projection DTO
-│   │   ├── entity/          # JPA Entity（Policy, Payment, SealAuth...）
-│   │   ├── repository/      # JPA Repository + MyBatis Mapper
-│   │   ├── security/        # JwtUtil, JwtAuthenticationFilter
-│   │   └── service/         # 核心業務邏輯
-│   └── src/test/            # JUnit 5 + Mockito 單元測試
-└── frontend/
-└── src/
-├── views/           # Vue 頁面元件
-├── stores/          # Pinia 狀態管理（authStore）
-├── router/          # Vue Router + Navigation Guard
-└── utils/           # Axios 實例 + Interceptor
+
+**backend/**
+- `config/` — SecurityConfig, CorsConfig, DataInitializer
+- `controller/` — AuthController, PolicyController, PaymentController, SealAuthController, ReportController, DashboardController
+- `dto/` — Request / Response / Projection DTO
+- `entity/` — JPA Entity（Policy, Payment, SealAuth, AuditLog, SysUser）
+- `repository/` — JPA Repository + MyBatis Mapper
+- `security/` — JwtUtil, JwtAuthenticationFilter
+- `service/` — 核心業務邏輯
+- `src/test/` — JUnit 5 + Mockito 單元測試
+
+**frontend/src/**
+- `views/` — Vue 頁面元件
+- `stores/` — Pinia 狀態管理（authStore）
+- `router/` — Vue Router + Navigation Guard
+- `utils/` — Axios 實例 + Interceptor
 
 ## JaCoCo 覆蓋率報告
 
